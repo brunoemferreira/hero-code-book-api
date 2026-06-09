@@ -1,0 +1,27 @@
+{
+  "name": "hero-code-book-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brunoemferreira/hero-code-book-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brunoemferreira/hero-code-book-api/issues"
+  },
+  "homepage": "https://github.com/brunoemferreira/hero-code-book-api#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "uuid": "^14.0.0"
+  }
+}
