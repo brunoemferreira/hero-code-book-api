@@ -32,6 +32,17 @@ app.post("/books", (req, res) => {
   return res.status(201).json({ message: "Book created successfully" });
 });
 
+app.put("/users/:id", (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  const findUser = users.find((user) => user.id === id);
+
+  findUser.name = name;
+
+  return res.json(users);
+});
+
 app.listen(3333, () => {
   console.log("Server is running on port 3333");
 });
