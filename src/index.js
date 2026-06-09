@@ -7,6 +7,7 @@ app.use(express.json());
 const users = [];
 const books = [];
 
+// Cria um novo usuário
 app.post("/users", (req, res) => {
   const { name, email } = req.body;
 
@@ -20,10 +21,12 @@ app.post("/users", (req, res) => {
   return res.status(201).json({ message: "User created successfully" });
 });
 
+// Retorna a lista de usuários
 app.get("/users", (req, res) => {
   return res.status(200).json(users);
 });
 
+// Cria um novo livro
 app.post("/books", (req, res) => {
   const { name, author, company, description, user_id } = req.body;
 
@@ -32,6 +35,17 @@ app.post("/books", (req, res) => {
   return res.status(201).json({ message: "Book created successfully" });
 });
 
+//
+app.get("/books/:id", (req, res) => {
+  const { id } = req.params;
+
+  const findBook = books.filter((book) => {
+    return book.user_id === id;
+  });
+  return res.json(findBook);
+});
+
+// Atualiza o nome de um usuário existente
 app.put("/users/:id", (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
