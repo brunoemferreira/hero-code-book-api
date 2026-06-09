@@ -5,6 +5,7 @@ const app = express();
 app.use(express.json());
 
 const users = [];
+const books = [];
 
 app.post("/users", (req, res) => {
   const { name, email } = req.body;
@@ -19,9 +20,16 @@ app.post("/users", (req, res) => {
   return res.status(201).json({ message: "User created successfully" });
 });
 
-
 app.get("/users", (req, res) => {
-    return res.status(200).json(users);
+  return res.status(200).json(users);
+});
+
+app.post("/books", (req, res) => {
+  const { name, author, company, description, user_id } = req.body;
+
+  books.push({ name, author, company, description, id: uuid(), user_id });
+
+  return res.status(201).json({ message: "Book created successfully" });
 });
 
 app.listen(3333, () => {
