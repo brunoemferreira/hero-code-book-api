@@ -39,7 +39,11 @@ function stringFormatted(string) {
 app.post("/books", (req, res) => {
   const { name, author, company, description, user_id } = req.body;
 
-  const bookAlreadyExists = books.find((book) => book.user_id === user_id && stringFormatted(book.name) === stringFormatted(name));
+  const bookAlreadyExists = books.find(
+    (book) =>
+      book.user_id === user_id &&
+      stringFormatted(book.name) === stringFormatted(name),
+  );
   if (bookAlreadyExists) {
     return res.status(400).json({ error: "Book already exists for this user" });
   }
@@ -72,6 +76,36 @@ app.put("/users/:id", (req, res) => {
   findUser.name = name;
 
   return res.json(users);
+});
+
+// Exclui um usuário pelo ID
+// Exemplo de uso: DELETE /users/ID_DO_USUARIO
+app.delete("/users/:id", (req, res) => {
+  const { id } = req.params;
+
+  const userIndex = users.findIndex((user) => user.id === id);
+
+  if (userIndex === -1) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  users.splice(userIndex, 1);
+  return res.json(users);
+});
+
+// Exclui um livro pelo ID
+// Exemplo de uso: DELETE /books/ID_DO_LIVRO
+app.delete("/books/:id", (req, res) => {
+  const { id } = req.params;
+
+  const bookIndex = books.findIndex((book) => book.id === id);
+
+  if (bookIndex === -1) {
+    return res.status(404).json({ message: "Book not found" });
+  }
+
+  books.splice(bookIndex, 1);
+  return res.json(books);
 });
 
 app.listen(3333, () => {
