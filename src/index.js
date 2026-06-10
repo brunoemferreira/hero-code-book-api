@@ -7,6 +7,18 @@ app.use(express.json());
 const users = [];
 const books = [];
 
+function verifyUser(req, res, next) {
+  const { email } = req.headers;
+  
+  const alreadyExistsEmail = users.find((user) => user.email === email);
+
+  if (!alreadyExistsEmail) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  req.user = alreadyExistsEmail;
+  return next();
+}
+
 // Cria um novo usuário
 // Exemplo de uso: POST /users
 // Corpo: { "name": "Maria", "email": "maria@example.com" }
